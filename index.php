@@ -50,8 +50,8 @@ function initializeGame()
     $secondCard = array_pop($deck);
     return [
         'deck' => $deck,
-        'currentCard' => $firstCard,
-        'nextCard' => $secondCard,
+        'currentCard' => $firstCard,  ///  ['value':2,'cardSymbol':'♠']
+        'nextCard' => $secondCard, ///  ['value':3'cardSymbol':'♠']
         'guessedCards' => [$firstCard],
         'score' => 0,
         'gameOver' => false,
@@ -65,7 +65,7 @@ function initializeGame()
 /// ENTRY POINT of the Applicion on Fresh Session / Fresh Load.  GET request
 
 if (!isset($_SESSION['gameState'])) {
-    $_SESSION['gameState'] = initializeGame();
+    $_SESSION['gameState'] = initializeGame();  
 }
 
 /// Stores all the status of game in this variable
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $gameState['message'] = 'Correct! Keep going!';
                 //nextcard becomes current card and we get new nextcard by poping out of the array 
                 $gameState['currentCard'] = $gameState['nextCard'];
-                $gameState['nextCard'] = array_pop($gameState['deck']);
+                $gameState['nextCard'] = array_pop($gameState['deck']); // pop out next card
                 // we stored guessed cards in the displayed Cards array
                 $gameState['guessedCards'][] = $gameState['currentCard'];
             }
